@@ -8,11 +8,6 @@ variable "ami" {
     type        = string
 }
 
-variable "key_name" {
-    description = "Name of the existing key pair"
-    type        = string
-}
-
 variable "instances_count" {
    description = "Number of instance to create"
    type = number
