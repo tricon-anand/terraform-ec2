@@ -20,7 +20,7 @@ resource "aws_instance" "simple_nodejs"{
 resource "aws_security_group" "TF_SG" {
   name        = "Allow SSH, HTTP and HTTPS"
   description = "Allow SSH, HTTP and HTTPS"
-  vpc_id      = module.my_vpc.output_aws_subnet
+  vpc_id      = module.my_vpc.output_aws_vpc
 
   ingress {
     description      = "HTTPS"
