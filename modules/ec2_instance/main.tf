@@ -12,13 +12,13 @@ resource "aws_instance" "simple_nodejs"{
     Name = var.instance_names
   }
   subnet_id = module.my_vpc.output_subnet
-  vpc_security_group_ids = ["aws_security_group.TF_SG.name"]
+  vpc_security_group_ids = [aws_security_group.TF_SG.id]
   user_data = file("${path.module}/script.sh")
 }
 
 
 resource "aws_security_group" "TF_SG" {
-  name        = "demoGroup"
+  name        = "TF_SG"
   description = "Allow SSH, HTTP and HTTPS"
   vpc_id      = module.my_vpc.output_aws_vpc
 
