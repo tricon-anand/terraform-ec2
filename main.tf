@@ -7,6 +7,6 @@
 
 module "s3_bucket" {
   source = "./modules/s3_bucket"
-  bucket = "tf-demo-state-bucket"
+  bucket = "tf-anand-state-bucket"
 }
 
