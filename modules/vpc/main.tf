@@ -7,6 +7,10 @@ resource "aws_vpc" "main" {
   }
 }
 
+output "output_aws_vpc" {
+ value = aws_vpc.main.id
+}
+
 resource "aws_subnet" "demo_subnet" {
   vpc_id     = aws_vpc.main.id
   cidr_block = "10.0.1.0/24"
@@ -16,9 +20,6 @@ resource "aws_subnet" "demo_subnet" {
   }
 }
 
-output "output_aws_vpc" {
- value = aws_vpc.main.id
-}
 
 output "output_subnet" {
   value = aws_subnet.demo_subnet.id
