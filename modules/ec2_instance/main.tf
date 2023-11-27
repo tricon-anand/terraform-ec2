@@ -1,3 +1,10 @@
+module "my_vpc" {
+  source                  = "../vpc"
+  vpc_name                = "testVPC"
+  cidr_block              = "10.0.0.0/16"
+  availability_zones      = ["us-east-1a", "us-east-1b", "us-east-1c"]
+}
+
 resource "aws_instance" "simple_nodejs"{
   ami = var.ami
   instance_type = var.instance_type  
@@ -5,7 +12,9 @@ resource "aws_instance" "simple_nodejs"{
   tags = {
     Name = var.instance_names[count.index]
   }
+  subnet_id = module.my_vpc.output_subnet
   security_groups = [aws_security_group.TF_SG.name]
+  user_data = file("${path.module}/script.sh")
 }
 
 
