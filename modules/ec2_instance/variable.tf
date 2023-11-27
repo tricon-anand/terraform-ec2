@@ -8,12 +8,12 @@ variable "ami" {
     type        = string
 }
 
-variable "instances_count" {
-   description = "Number of instance to create"
-   type = number
-}
+# variable "instances_count" {
+#    description = "Number of instance to create"
+#    type = number
+# }
 
 variable "instance_names" {
   description = "List of instance names"
-  type = list(string)
+  type = string
 }
