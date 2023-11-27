@@ -11,7 +11,7 @@ resource "aws_instance" "simple_nodejs"{
   tags = {
     Name = var.instance_names
   }
-  subnet_id = module.my_vpc.output_subnet
+  subnet_id = module.my_vpc.ouput-public-subnet
   vpc_security_group_ids = [aws_security_group.TF_SG.id]
   user_data = file("${path.module}/script.sh")
 }
