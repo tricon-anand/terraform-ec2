@@ -20,25 +20,8 @@ resource "aws_subnet" "demo_subnet" {
   }
 }
 
-resource "aws_subnet" "public" {
-  count                  = length(var.availability_zones)
-  cidr_block             = cidrsubnet(var.cidr_block, 8, count.index + 1)
-  availability_zone      = var.availability_zones[count.index]
-  vpc_id                 = aws_vpc.main.id
-  map_public_ip_on_launch = true
-  tags = {
-    Name = "${var.vpc_name}-public-${count.index + 1}"
-  }
-}
-
-resource "aws_subnet" "private" {
-  count                  = length(var.availability_zones)
-  cidr_block             = cidrsubnet(var.cidr_block, 8, count.index + 2)
-  availability_zone      = var.availability_zones[count.index]
-  vpc_id                 = aws_vpc.main.id
-  tags = {
-    Name = "${var.vpc_name}-private-${count.index + 1}"
-  }
+resource "aws_subnet" "public_subnet" {
+  vpc_id     = aws_vpc.main
 }
 
 resource "aws_route_table" "demo_table" {
