@@ -16,6 +16,10 @@ resource "aws_subnet" "demo_subnet" {
   }
 }
 
+output "output_aws_subnet" {
+ value= aws_subnet.demo_subnet.id 
+}
+
 output "output_subnet" {
   value = aws_subnet.demo_subnet.id
 }
