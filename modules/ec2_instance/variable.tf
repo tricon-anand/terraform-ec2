@@ -13,6 +13,10 @@ variable "ami" {
 #    type = number
 # }
 
+variable "aws_keypair" {
+  type =  string
+}
+
 variable "instance_names" {
   description = "List of instance names"
   type = string
