@@ -14,7 +14,7 @@ variable "ami" {
 # }
 
 variable "aws_keypair" {
-  type =  string
+  type =  any
 }
 
 variable "instance_names" {
