@@ -14,6 +14,27 @@ resource "aws_instance" "simple_nodejs"{
   subnet_id = module.my_vpc.ouput-public-subnet
   vpc_security_group_ids = [aws_security_group.TF_SG.id]
   user_data = file("${path.module}/script.sh")
+  key_name = "demoKeyPair"
+}
+
+
+resource "aws_key_pair" "demoKeyPair" {
+  key_name = "demoKeyPair"
+  public_key = tls_private_key.rsapublickey.private_key_openssh
+
+  tags = {
+    Name = "demoKeyPair"
+  }
+}
+
+resource "tls_private_key" "rsapublickey" {
+  algorithm = "RSA"
+  rsa_bits  = 4096
+}
+
+resource "local_file" "keyPairSSH" {
+  content  = tls_private_key.rsapublickey.private_key_pem
+  filename = "${path.module}/keyPairSSH"
 }
 
 
