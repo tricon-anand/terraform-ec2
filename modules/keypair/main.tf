@@ -1,22 +1,20 @@
-resource "aws_key_pair" "generated_key_pair" {
-  key_name = "demoKeyPair"
-  public_key = tls_private_key.generate_private_key.public_key_openssh
-
-  tags = {
-    Name = "demoKeyPair"
-  }
-}
-
 resource "tls_private_key" "generate_private_key" {
   algorithm = "RSA"
   rsa_bits  = 4096
 }
 
-resource "local_file" "keyPairSSH" {
-  content  = tls_private_key.generate_private_key.private_key_pem
-  filename = "${path.module}/keyPairSSH"
-}
+resource "aws_key_pair" "key_pair" {
+  key_name = "private_KP"
+  public_key = tls_private_key.generate_private_key.public_key_openssh
 
-output "aws_keypair" {
-  value = aws_key_pair.generated_key_pair.key_name
+  provisioner "local-exec" {
+    command = <<-EOT
+    echo '${tls_private_key.generate_private_key.private_key_pem}'> private_KP.em
+    chmod 400 private_KP.em
+    EOT
+  }
+
+  tags = {
+    Name = "private_KP"
+  }
 }
