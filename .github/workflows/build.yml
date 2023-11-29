@@ -3,6 +3,9 @@ name: Create Ec2 instance
 on:
  push:
    branches: ["main"]
+ pull_request:
+    types:
+      - closed 
 
 jobs:
   create-ec2-instance:
