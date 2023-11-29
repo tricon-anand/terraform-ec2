@@ -4,5 +4,5 @@ variable "vpc_id" {
 
 variable "sgPortsPublic" {
   type = list(string)
-  default = [ 20, 80 ]
+  default = [ 22, 80 ]
 }
