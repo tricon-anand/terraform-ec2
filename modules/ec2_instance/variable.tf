@@ -21,3 +21,11 @@ variable "instance_names" {
   description = "List of instance names"
   type = string
 }
+
+variable "public_id" {
+  type = string
+}
+
+variable "vpc_security_group_ids" {
+  type = list(string)
+}
