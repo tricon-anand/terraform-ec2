@@ -10,4 +10,14 @@ resource "aws_instance" "first_ec2"{
   key_name = var.aws_keypair
 
   depends_on = [ var.aws_keypair ]
+
+  connection {
+    type = "ssh"
+    host = self.public_ip
+    user = "ec2-user"
+
+    # Mention the exact private key name which will be generated
+    private_key = file("private_KP.pem")
+    timeout     = "4m"
+  }
 }
