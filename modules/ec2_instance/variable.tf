@@ -22,7 +22,7 @@ variable "instance_names" {
   type = string
 }
 
-variable "public_id" {
+variable "publicSubnet" {
   type = string
 }
 

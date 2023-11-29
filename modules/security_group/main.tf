@@ -1,30 +1,15 @@
 resource "aws_security_group" "TF_SG" {
-  name        = "TF_SG"
-  description = "Allow SSH, HTTP and HTTPS"
+  name        = "sg_instance"
   vpc_id      = var.vpc_id
 
-  ingress {
-    description      = "HTTPS"
-    from_port        = 443
-    to_port          = 443
-    protocol         = "tcp"
-    cidr_blocks      = ["0.0.0.0/0"]
-  }
-
-  ingress {
-    description      = "HTTP"
-    from_port        = 80
-    to_port          = 80
-    protocol         = "tcp"
-    cidr_blocks      = ["0.0.0.0/0"]
-  }
-
-  ingress {
-    description      = "SSH"
-    from_port        = 22
-    to_port          = 22
-    protocol         = "tcp"
-    cidr_blocks      = ["0.0.0.0/0"]
+  dynamic "ingress" {
+    for_each = sgPortsPublic
+    content {
+      from_port = ingress.value
+      to_port = ingress.value
+      protocol = "tcp"
+      cidr_blocks = [ "0.0.0.0/0" ] // Change to my local IP address if new to access from my ip address
+    }
   }
 
   egress {
@@ -34,11 +19,4 @@ resource "aws_security_group" "TF_SG" {
     cidr_blocks      = ["0.0.0.0/0"]
   }
 
-  tags = {
-    Name = "test"
-  }
-}
-
-output "sg_list" {
-  value = aws_security_group.TF_SG.id
 }
