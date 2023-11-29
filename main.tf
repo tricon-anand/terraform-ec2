@@ -26,5 +26,5 @@ module "s3_bucket" {
 
 module "aws_security_group" {
   source = "./modules/security_group"
-  vpc_id = module.mvpc.output_aws_vpc
+  vpc_id = module.vpc.output_aws_vpc
 }
