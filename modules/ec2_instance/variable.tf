@@ -8,11 +8,6 @@ variable "ami" {
     type        = string
 }
 
-# variable "instances_count" {
-#    description = "Number of instance to create"
-#    type = number
-# }
-
 variable "aws_keypair" {
   type =  any
 }
