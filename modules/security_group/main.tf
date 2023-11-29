@@ -3,7 +3,7 @@ resource "aws_security_group" "TF_SG" {
   vpc_id      = var.vpc_id
 
   dynamic "ingress" {
-    for_each = sgPortsPublic
+    for_each = var.sgPortsPublic
     content {
       from_port = ingress.value
       to_port = ingress.value
