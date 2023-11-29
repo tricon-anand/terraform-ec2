@@ -11,7 +11,7 @@ module "ec2_instance" {
   ami="ami-0fc5d935ebf8bc3bc"
   instance_names = "dev"
   aws_keypair = module.key_pair.aws_keypair
-  publicSubnet = module.my_vpc.ouput-public-subnet
+  publicSubnet = module.vpc.ouput-public-subnet
   vpc_security_group_ids = [module.aws_security_group.sg_list]
 }
 
